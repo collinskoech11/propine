@@ -1,5 +1,5 @@
 import data from "../data/data"
-import getAllBalance from "../getAllBalance"
+import getAllBalance from "../utils/getAllBalance"
 import getRates from "../Conversion/getRates"
 import toUsd from "../Conversion/toUsd"
 
