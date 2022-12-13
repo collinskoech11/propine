@@ -4,17 +4,19 @@ const getAllBalance = (data:any) => {
         XRP:0,
         ETH:0
     }
-    for(var i of data){
-        let token = i.token
-        if(i.transaction_type == "DEPOSIT"){
+    let x = data.length-1
+    while(x>=0){
+        let token = data[x].token
+        if(data[x].transaction_type == "DEPOSIT"){
             var current_amount:number = initialBalances[token]
-            current_amount += Number(i.amount)
+            current_amount += Number(data[x].amount)
             initialBalances[token] = current_amount
         } else {
             var current_amount:number = initialBalances[token]
-            current_amount -= Number(i.amount)
+            current_amount -= Number(data[x].amount)
             initialBalances[token] = current_amount
         }
+        x--;
     }
     return initialBalances;
 }

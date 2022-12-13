@@ -1,19 +1,43 @@
-import data from "./data/data"
-import getAllBalance from "./getAllBalance"
-import getRates from "./Conversion/getRates"
-import toUsd from "./Conversion/toUsd"
-import getSingleToken from "./getSingleToken"
+import express from "express"
+import dotenv from "dotenv"
+import currentBalance from "./Routes/CurrentBalance"
+import getTokenBalance from "./Routes/singleTokenBalance"
+import dateBalances from "./Routes/DateBalances"
+
+dotenv.config()
+
+const app = express()
+const port = process.env.PORT
 
 
-async function call(){
-    const balances:any = getAllBalance(data)
+app.get('/token-balance-by-date/:date', async(req:any, res:any, next:any) => {
+    const latestDate:any = req.params.date;
+    let result =await dateBalances(latestDate)
+    res.send(result) 
+})
+app.get('/token-balance-by-date/:date/:token_symbol', async(req:any, res:any, next:any) => {
+    const latestDate:any = req.params.date;
+    const token_symbol:any = req.params.token_symbol
+    let result =await dateBalances(latestDate)
+    let singleTokenResult = result[token_symbol]
+    res.send({token:token_symbol,balance:singleTokenResult}) 
+})
+app.get('/get-all-balances', async(req:any, res:any, next:any) => {
+    const dataBalance:any = await currentBalance()
+    console.log(dataBalance)
+    res.send(dataBalance)
+})
+app.get('/get-single-token/:token_symbol', async(req:any, res:any, next:any) => {
+    const token_symbol:any = req.params.token_symbol
+    const symbolBalance = await getTokenBalance(token_symbol)
 
-    const rates:any = await getRates()
-
-    let usdBalances = toUsd(balances, rates)
-    console.log("ETH",usdBalances)
-
-    let singleToken = getSingleToken("BTC", balances)
-    console.log(singleToken)
-}
-call()
+    res.send(symbolBalance)
+})
+app.listen(port, () => {
+    console.log("server inakimbia kwa hii mtaa",port)
+})
+// {
+//     "BTC": 98016.36049764001,
+//     "XRP": 0.4711636927999999,
+//     "ETH": 6118.009305799998
+//   }
