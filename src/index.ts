@@ -3,9 +3,6 @@ import dotenv from "dotenv"
 import currentBalance from "./Routes/CurrentBalance"
 import getTokenBalance from "./Routes/singleTokenBalance"
 import dateBalances from "./Routes/DateBalances"
-import {GoogleSpreadsheet} from "google-spreadsheet"
-import getData from "./data/ReadData"
-import { Console } from "console"
 
 
 dotenv.config()
@@ -34,13 +31,7 @@ app.get('/get-all-balances', async(req:any, res:any, next:any) => {
 app.get('/get-single-token/:token_symbol', async(req:any, res:any, next:any) => {
     const token_symbol:any = req.params.token_symbol
     const symbolBalance = await getTokenBalance(token_symbol)
-
     res.send(symbolBalance)
-})
-app.get('/sheets', async(req:any, res:any) => {
-    const allData = await getData()
-    console.log(allData)
-    res.send(allData)
 })
 app.listen(port, () => {
     console.log("server inakimbia kwa hii mtaa",port)
