@@ -1,6 +1,6 @@
 # Get Started 
 
-### git clone `https://github.com/collinskoech11/propineInterview`
+`git clone https://github.com/collinskoech11/propineInterview`
 
 ## run the server
 
@@ -12,23 +12,27 @@
 
 ## get the latest portfolio value per token in USD 
 
-### GET: `http://localhost:3000/get-all-balances`
+### GET:
+`http://localhost:3000/get-all-balances`
 
 ## get the latest portfolio value for a given token 
 
-### GET: `http://localhost:3000/get-single-token/<token_symbol>`
+### GET:
+`http://localhost:3000/get-single-token/<token_symbol>`
 
 pass in the token symbol e.g BTC as the token_symbol to get the USD value for BTC
 
 ## get the return portfolio value per token in USD on a specific date 
 
-### GET:` http://localhost:3000/token-balance-by-date/<date>`
+### GET:
+`http://localhost:3000/token-balance-by-date/<date>`
 
 pass in the date e.g 22-12-1978 as the date to get the USD value for all tokens at that date 
 
 ## get the return portfolio value in USD on a specific date  on a specific token 
 
-### GET: `http://localhost:3000/token-balance-by-date/<date>/<token_symbol>`
+### GET:
+`http://localhost:3000/token-balance-by-date/<date>/<token_symbol>`
 
 pass in the date e.g 22-12-1978 and the token symbol eg BTC as the date to get the USD value for all tokens at that date 
 
