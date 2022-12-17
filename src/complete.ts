@@ -1,11 +1,18 @@
-const fs = require('fs');
-const moment = require('moment');
+import * as fs from 'fs';
+import * as moment from 'moment';
 
 // Parse command line arguments
 const [, , ...args] = process.argv;
 
+interface Transaction {
+  timestamp: number;
+  transactionType: string;
+  token: string;
+  amount: number;
+}
+
 // Read CSV file
-const transactions = fs.readFileSync('transactions.csv', 'utf-8')
+const transactions: Transaction[] = fs.readFileSync('transactions.csv', 'utf-8')
   .split('\n')
   .slice(1) // skip header row
   .map(line => line.split(','))
@@ -17,7 +24,7 @@ const transactions = fs.readFileSync('transactions.csv', 'utf-8')
   }));
 
 // Get portfolio value at a given timestamp
-const getPortfolioValue = (timestamp, token = null) => {
+const getPortfolioValue = (timestamp: number | null, token: string | null): number => {
   // Initialize portfolio value to 0
   let portfolioValue = 0;
 
@@ -48,7 +55,7 @@ const getPortfolioValue = (timestamp, token = null) => {
 // Handle command line arguments
 if (args.length === 0) {
   // No arguments, return latest portfolio value per token
-  console.log(getPortfolioValue());
+  console.log(getPortfolioValue(null, null));
 } else if (args.length === 1) {
   // One argument, assume it is a token and return latest portfolio value for that token
   console.log(getPortfolioValue(null, args[0]));
