@@ -4,11 +4,11 @@
 
 ## run the server
 
-### cd propineInterview
+`cd propineInterview`
 
-### npm install 
+`npm install `
 
-### npm start 
+`npm start `
 
 ## get the latest portfolio value per token in USD 
 
