@@ -11,7 +11,7 @@ const getAllBalance = (data:any) => {
             var current_amount:number = initialBalances[token]
             current_amount += Number(data[x].amount)
             initialBalances[token] = current_amount
-        } else {
+        } else if (data[x].transaction_type == "WITHDRAW") {
             var current_amount:number = initialBalances[token]
             current_amount -= Number(data[x].amount)
             initialBalances[token] = current_amount
