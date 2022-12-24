@@ -61,7 +61,7 @@ if (args.length === 0) {
   console.log(getPortfolioValue(null, args[0]));
 } else if (args.length === 2) {
   // Two arguments, assume first is a date and second is a token
-  console.log(getPortfolioValue(moment(args[0]).valueOf(), args[1]));
+  console.log(getPortfolioValue(require('moment')(args[0]).valueOf(), args[1]));
 } else {
   console.error('Invalid number of arguments');
 }
